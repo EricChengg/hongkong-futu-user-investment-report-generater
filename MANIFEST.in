@@ -1,0 +1,10 @@
+include README.md
+recursive-include futu *.md
+recursive-include futu *.url
+recursive-include futu *.json
+recursive-include futu *.bat
+recursive-include futu *.csv
+
+include requirements.txt
+include futu/VERSION.txt
+recursive-include doc_maker *

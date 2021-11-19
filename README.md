@@ -1,3 +1,5 @@
+I just learn python
+
 # 富途 OpenAPI
 
 ### 简介

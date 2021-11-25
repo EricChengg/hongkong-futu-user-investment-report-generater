@@ -1,8 +1,7 @@
 This application for my learning python and check my futu investment report, welcome to develop more different type report in this project.
 
-following is futu install openAPI guide.
+you can type to run my code at futu/MyProgramm/__init__.py file to generate your investment report after following futu install openAPI guide.
 
-you can type to run my code at futu/MyProgramm/__init__.py file to generate your investment report.
 
 # 富途 OpenAPI
 

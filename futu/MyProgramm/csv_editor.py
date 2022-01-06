@@ -8,6 +8,7 @@ from openpyxl import Workbook
 
 import daily_settlement
 import common
+import position_stock
 
 downloads_path = str(Path.home() / "Downloads")
 
@@ -50,15 +51,10 @@ def write_csv(file_name, fields, rows):
 def write_sheet_xlsx(file_name, sheets: []):
     xlsx_file_name = str(Path.home() / "Downloads" / file_name) + '.xlsx'
     wb = Workbook()
-    print('write_sheet_xlsx')
     for sheet in sheets:
         ws = wb.create_sheet(sheet.sheet_name)
         ws.append(sheet.fields)
-        print(type(sheet.rows))
-        print(len(sheet.rows))
         for row in sheet.rows:
-            print('show row: ', row)
-            print('row : ', type(row))
             ws.append(list(row))
     wb.save(xlsx_file_name)
 
@@ -82,21 +78,29 @@ def write_trade_record_report(file_name=None, start_date=None, end_date=None):
     if end_date is None:
         end_date = datetime.datetime.today() + datetime.timedelta(days=1)
     fields, rows, trade_records = trade_record.get_trade_record(start_date, end_date.strftime(common.date_format))
+
     if file_name is None:
         end_date = end_date + datetime.timedelta(days=-1)
         file_name = str('trade_report' + start_date + '~' + end_date.strftime(common.date_format))
+
+    position_stocks = position_stock.get_position_stock()
     sheets = []
-    print(trade_records[3].status)
     daily_settlements = daily_settlement.get_daily_settlement(trade_records)
+
     ds = Sheet('daily_report')
     ds.add_fields(daily_settlement.daily_settlements_field)
     ds.add_rows(daily_settlements)
-    print('ds.rows: ', type(daily_settlements))
     sheets.append(ds)
+
     tr = Sheet('trade_record')
     tr.add_fields(fields)
     tr.add_rows(rows)
-    print('tr.rows: ', type(rows))
     sheets.append(tr)
+
+    ps = Sheet('position_stock')
+    ps.add_fields(position_stock.position_stocks_field)
+    ps.add_rows(position_stocks)
+    sheets.append(ps)
+
     write_sheet_xlsx(file_name, sheets)
     print('Done')

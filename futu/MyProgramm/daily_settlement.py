@@ -20,6 +20,8 @@ class DailySettlement:
         self.sell_cost = 0
         self.total_sell_amount = 0
         self.earn = 0
+        # self.total_assets = 0
+        self.position_ratio = 0
 
 
 def get_daily_settlement(trade_records) -> list:
@@ -51,3 +53,10 @@ def get_daily_settlement(trade_records) -> list:
         i += 1
     print('daily settlements done')
     return daily_settlements
+
+# def getTotalAssets()
+#     trd_ctx = OpenSecTradeContext(filter_trdmarket=TrdMarket.HK, host='127.0.0.1', port=11111,
+#                                   security_firm=SecurityFirm.FUTUSECURITIES)
+#     data['total_assets'][0]
+#     ret, data = trd_ctx.accinfo_query()
+#     trd_ctx.close()

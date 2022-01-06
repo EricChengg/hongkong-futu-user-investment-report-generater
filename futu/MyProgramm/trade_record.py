@@ -50,15 +50,8 @@ def get_trade_record(start_date, end_date) -> (list, list, list):
                                  data['status'][i],
                                  fee.get_order_price(data['price'][i], data['qty'][i]),
                                  fee.get_trade_fee(data.loc[i]))
-                # print(trade_record.__dict__.values())
                 trade_record_list.append(tr.__dict__.values())
                 trade_records.append(tr)
-                # t.add_row(
-                #     [data['deal_id'][i], data['trd_side'][i], data['order_id'][i], data['code'][i],
-                #      data['stock_name'][i],
-                #      data['qty'][i],
-                #      data['price'][i], data['create_time'][i], data['counter_broker_id'][i],
-                #      data['counter_broker_name'][i], data['status'][i], fee.get_trade_fee(data.loc[i])])
                 i = i + 1
             # print(t)
             return fields, trade_record_list, trade_records
